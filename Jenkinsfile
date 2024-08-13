@@ -1,35 +1,35 @@
 pipeline {
-    agent any
-
+    agent any 
     stages {
-        stage('Checkout') {
+        stage('Static Analysis') {
             steps {
-                // Checkout code from the GitHub repository
-                git 'https://github.com/M-Mujeeb/landing.git'
+                echo 'Run the static analysis to the code' 
             }
         }
-
-        stage('Build') {
+        stage('Compile') {
             steps {
-                // Build your project here
-                sh './build.sh'
+                echo 'Compile the source code' 
             }
         }
-
-        stage('Deploy') {
+        stage('Security Check') {
             steps {
-                // Deploy your project here
-                sh './deploy.sh'
+                echo 'Run the security check against the application' 
             }
         }
-    }
-
-    post {
-        success {
-            echo 'Deployment successful!'
+        stage('Run Unit Tests') {
+            steps {
+                echo 'Run unit tests from the source code' 
+            }
         }
-        failure {
-            echo 'Deployment failed.'
+        stage('Run Integration Tests') {
+            steps {
+                echo 'Run only crucial integration tests from the source code' 
+            }
+        }
+        stage('Publish Artifacts') {
+            steps {
+                echo 'Save the assemblies generated from the compilation' 
+            }
         }
     }
 }
